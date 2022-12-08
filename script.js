@@ -3,6 +3,8 @@
 var day = today.getDay();  
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 console.log("Today is : " + weekdays[day] + ".");  
+const colorcode = document.getElementsByClassName("colorcode");
+let currentHour = Date.now().getHours();
 var hour = today.getHours();  
 var minute = today.getMinutes();  
 var second = today.getSeconds();  
@@ -35,3 +37,21 @@ prepand=' AM';
 }   
 }   
 console.log("Current Time : "+hour + prepand + " : " + minute + " : " + second); 
+
+colorcode.forEach(function(colorcodedDiv){
+    let colorcodeHour = parseInt(colorcodedDiv.id);
+  if (colorcodeHour) {
+    if (currentHour === colorcodeHour) {
+      setColor(colorcodedDiv, "Red");
+    } else if ((currentHour < colorcodeHour) && (currentHour > colorcodeHour - 6)) {
+      setColor(colorcodedDiv, "Green");
+ }else if ((currentHour > colorcodeHour) && (currentHour < colorcodeHour + 6)) {
+      setColor(colorcodedDiv, "LightGrey");
+    }       else {
+      setColor(colorcodedDiv, "White");
+    }
+  }
+});
+function setColor(element, color) {
+    element.style.backgroundColor = color;
+}
